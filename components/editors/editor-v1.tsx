@@ -3,10 +3,11 @@
 import {
   $getRoot,
   $getSelection,
+  EditorState,
   SerializedEditorState,
   SerializedLexicalNode,
 } from "lexical";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -15,6 +16,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { Button } from "@/components/ui/button";
 
 const theme = {
   // Theme styling goes here
@@ -28,8 +30,12 @@ function onError(error: Error) {
 }
 
 export default function EditorV1() {
-  const [editorState, setEditorState] =
+  const [editorState1, setEditorState1] =
     useState<SerializedEditorState<SerializedLexicalNode>>();
+  const [editorState2, setEditorState2] = useState<EditorState>();
+  const [editorState3, setEditorState3] = useState<EditorState>();
+
+  const editorStateRef = useRef<EditorState>();
 
   const initialConfig = {
     namespace: "MyEditor",
@@ -37,7 +43,9 @@ export default function EditorV1() {
     onError,
   };
 
-  console.log(editorState?.root);
+  console.log(editorState1);
+  console.log(editorState2);
+  console.log(editorState3);
 
   return (
     <div className="relative">
@@ -56,11 +64,23 @@ export default function EditorV1() {
         <HistoryPlugin />
         <AutoFocusPlugin />
         <OnChangePlugin
-          onChange={(editorState) => {
+          onChange={(editorState: EditorState) => {
             const editorStateJSON = editorState.toJSON();
-            setEditorState(editorStateJSON);
+            editorStateRef.current = editorState;
+            setEditorState1(editorStateJSON);
+            setEditorState2(editorState);
           }}
         />
+
+        <Button
+          onClick={() => {
+            if (editorStateRef.current) {
+              setEditorState3(editorStateRef.current);
+            }
+          }}
+        >
+          Save
+        </Button>
       </LexicalComposer>
     </div>
   );

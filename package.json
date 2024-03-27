@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lexical/mark": "^0.14.2",
     "@lexical/react": "^0.14.2",
     "@lexical/selection": "^0.14.2",
     "@lexical/utils": "^0.14.2",

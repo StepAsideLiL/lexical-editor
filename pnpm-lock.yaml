@@ -11,6 +11,9 @@ dependencies:
   '@lexical/selection':
     specifier: ^0.14.2
     version: 0.14.2(lexical@0.14.2)
+  '@lexical/utils':
+    specifier: ^0.14.2
+    version: 0.14.2(lexical@0.14.2)
   '@radix-ui/react-slot':
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.2.67)(react@18.2.0)

@@ -2,13 +2,24 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import React, { useState } from "react";
+import FloatingTextFormatToolbar from "@/components/lexical-editor/plugins/FloatingTextFormatToolbar";
 
 export default function Editor() {
+  const [floatingAnchorElement, setFloatingAnchorElement] = useState<
+    HTMLDivElement | undefined
+  >(undefined);
+
+  const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+    if (_floatingAnchorElem !== null) {
+      setFloatingAnchorElement(_floatingAnchorElem);
+    }
+  };
+
   return (
     <div className="relative">
       <RichTextPlugin
         contentEditable={
-          <div>
+          <div ref={onRef}>
             <ContentEditable className="h-96 focus-visible:outline-none" />
           </div>
         }
@@ -19,6 +30,7 @@ export default function Editor() {
         }
         ErrorBoundary={LexicalErrorBoundary}
       />
+      <FloatingTextFormatToolbar anchorElement={floatingAnchorElement} />
     </div>
   );
 }

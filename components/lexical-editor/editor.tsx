@@ -2,6 +2,10 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import React, { useState } from "react";
+import MarkdownPlugin from "@/components/lexical-editor/plugins/MarkdownPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import ListMaxIndentLevelPlugin from "@/components/lexical-editor/plugins/ListMaxIndentLevelPlugin";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 
 export default function Editor() {
   const [floatingAnchorElement, setFloatingAnchorElement] = useState<
@@ -29,6 +33,10 @@ export default function Editor() {
         }
         ErrorBoundary={LexicalErrorBoundary}
       />
+      <MarkdownPlugin />
+      <ListPlugin />
+      <ListMaxIndentLevelPlugin />
+      <TabIndentationPlugin />
     </div>
   );
 }

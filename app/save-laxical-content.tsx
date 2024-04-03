@@ -8,7 +8,7 @@ import { save } from "./actions";
 import { toast } from "sonner";
 import { RotateCw } from "lucide-react";
 
-export default function Client({ root }: { root: string }) {
+export default function SaveLexicalContent({ root }: { root: string }) {
   const [disable, setDisable] = useState(false);
   const [editorState, setEditorState] = useState<EditorState>();
 

@@ -1,16 +1,14 @@
-"use client";
+import prisma from "@/lib/prismadb";
+import SaveLexicalContent from "./save-laxical-content";
 
-// import EditorV1 from "@/components/editors/editor-v1";
-import LexicalEditor from "@/components/lexical-editor/lexical-editor";
-import { EditorState } from "lexical";
-import { useState } from "react";
-
-export default function Page() {
-  const [editorState, setEditorState] = useState<EditorState>();
+export default async function Page() {
+  const text = await prisma.text.findUnique({
+    where: { id: "1" },
+  });
 
   return (
     <main className="container">
-      <LexicalEditor setEditorState={setEditorState} />
+      <SaveLexicalContent root={text!.text} />
     </main>
   );
 }

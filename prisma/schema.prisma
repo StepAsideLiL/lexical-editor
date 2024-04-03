@@ -11,6 +11,6 @@ datasource db {
 }
 
 model Text {
-  id   String @id @unique @default(cuid())
-  text String
+  id      String @id @unique @default(cuid())
+  content String @default("")
 }

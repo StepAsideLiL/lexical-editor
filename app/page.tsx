@@ -8,7 +8,7 @@ export default async function Page() {
 
   return (
     <main className="container">
-      <SaveLexicalContent root={text!.text} />
+      <SaveLexicalContent content={text!.content} />
     </main>
   );
 }

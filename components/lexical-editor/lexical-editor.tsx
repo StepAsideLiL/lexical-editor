@@ -8,22 +8,18 @@ import {
 import Editor from "@/components/lexical-editor/editor";
 import { Nodes } from "@/components/lexical-editor/nodes";
 import { theme } from "@/components/lexical-editor/theme";
-import {
-  EditorState,
-  SerializedEditorState,
-  SerializedLexicalNode,
-} from "lexical";
+import { EditorState } from "lexical";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 
 export default function LexicalEditor({
   setEditorState,
-  root,
+  content,
 }: {
   setEditorState: (state: EditorState) => void;
-  root?: string;
+  content?: string;
 }) {
   const initialConfig: InitialConfigType = {
-    editorState: root,
+    editorState: content,
     namespace: "Lexical-Editor",
     onError: (error: Error) => {
       throw error;

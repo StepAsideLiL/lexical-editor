@@ -7,10 +7,10 @@ export async function save(data: string) {
   try {
     const text = await prisma.text.upsert({
       where: { id: "1" },
-      create: { id: "1", text: data },
+      create: { id: "1", content: data },
       update: {
         id: "1",
-        text: data,
+        content: data,
       },
     });
 

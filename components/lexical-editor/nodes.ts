@@ -19,7 +19,7 @@ export const Nodes: Array<Klass<LexicalNode>> = [
   // TableCellNode,
   // TableRowNode,
   // HashtagNode,
-  // CodeHighlightNode,
+  CodeHighlightNode,
   // AutoLinkNode,
   LinkNode,
   // OverflowNode,

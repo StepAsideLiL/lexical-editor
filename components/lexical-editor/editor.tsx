@@ -7,6 +7,7 @@ import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import ListMaxIndentLevelPlugin from "@/components/lexical-editor/plugins/ListMaxIndentLevelPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import ToolBarPlugin from "@/components/lexical-editor/plugins/ToolBarPlugin";
+import CodeHighlightPlugin from "@/components/lexical-editor/plugins/CodeHighlightPlugin";
 
 export default function Editor() {
   return (
@@ -27,6 +28,7 @@ export default function Editor() {
           ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
+      <CodeHighlightPlugin />
       <MarkdownPlugin />
       <ListPlugin />
       <ListMaxIndentLevelPlugin />

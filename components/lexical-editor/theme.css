@@ -55,10 +55,7 @@
   vertical-align: super;
 }
 .EditorTheme__textCode {
-  background-color: rgb(240, 242, 245);
-  padding: 1px 0.25rem;
-  font-family: Menlo, Consolas, Monaco, monospace;
-  font-size: 94%;
+  @apply text-muted-foreground bg-muted px-[2px] py-[1px] font-mono rounded-sm;
 }
 .EditorTheme__hashtag {
   background-color: rgba(88, 144, 255, 0.15);

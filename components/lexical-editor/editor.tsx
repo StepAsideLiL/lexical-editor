@@ -1,22 +1,33 @@
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import React from "react";
+import React, { useState } from "react";
 import MarkdownPlugin from "@/components/lexical-editor/plugins/MarkdownPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import ListMaxIndentLevelPlugin from "@/components/lexical-editor/plugins/ListMaxIndentLevelPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import ToolBarPlugin from "@/components/lexical-editor/plugins/ToolBarPlugin";
 import CodeHighlightPlugin from "@/components/lexical-editor/plugins/CodeHighlightPlugin";
+import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 
 export default function Editor() {
+  const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
+  const [floatingAnchorElem, setFloatingAnchorElem] =
+    useState<HTMLDivElement | null>(null);
+
+  const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+    if (_floatingAnchorElem !== null) {
+      setFloatingAnchorElem(_floatingAnchorElem);
+    }
+  };
+
   return (
     <div>
-      <ToolBarPlugin />
+      <ToolBarPlugin setIsLinkEditMode={setIsLinkEditMode} />
       <div className="relative">
         <RichTextPlugin
           contentEditable={
-            <div>
+            <div ref={onRef}>
               <ContentEditable className="h-96 focus-visible:outline-none py-5" />
             </div>
           }
@@ -28,6 +39,15 @@ export default function Editor() {
           ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
+      {floatingAnchorElem && (
+        <>
+          <FloatingLinkEditorPlugin
+            anchorElem={floatingAnchorElem}
+            isLinkEditMode={isLinkEditMode}
+            setIsLinkEditMode={setIsLinkEditMode}
+          />
+        </>
+      )}
       <CodeHighlightPlugin />
       <MarkdownPlugin />
       <ListPlugin />

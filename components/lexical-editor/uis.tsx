@@ -15,7 +15,7 @@ export function EditorTooltip({
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
 
         <TooltipContent>
           <p>{label}</p>

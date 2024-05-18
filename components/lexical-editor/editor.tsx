@@ -10,6 +10,7 @@ import ToolBarPlugin from "@/components/lexical-editor/plugins/ToolBarPlugin";
 import CodeHighlightPlugin from "@/components/lexical-editor/plugins/CodeHighlightPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
+import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
 export default function Editor() {
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
@@ -50,6 +51,7 @@ export default function Editor() {
         </>
       )}
       <LinkPlugin />
+      <LexicalAutoLinkPlugin />
       <CodeHighlightPlugin />
       <MarkdownPlugin />
       <ListPlugin />

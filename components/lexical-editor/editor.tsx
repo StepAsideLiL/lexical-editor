@@ -9,6 +9,7 @@ import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin
 import ToolBarPlugin from "@/components/lexical-editor/plugins/ToolBarPlugin";
 import CodeHighlightPlugin from "@/components/lexical-editor/plugins/CodeHighlightPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
+import LinkPlugin from "./plugins/LinkPlugin";
 
 export default function Editor() {
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
@@ -48,6 +49,7 @@ export default function Editor() {
           />
         </>
       )}
+      <LinkPlugin />
       <CodeHighlightPlugin />
       <MarkdownPlugin />
       <ListPlugin />

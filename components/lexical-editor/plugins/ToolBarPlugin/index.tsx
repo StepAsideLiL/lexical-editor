@@ -94,11 +94,14 @@ import {
   AlignCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
+  RotateCcwIcon,
+  RotateCwIcon,
 } from "lucide-react";
 import { Dispatch, useCallback, useEffect, useState } from "react";
 import { getSelectedNode } from "../../utils/getSelectedNode";
 import { sanitizeUrl } from "../../utils/url";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Button } from "@/components/ui/button";
 
 const blockTypeToBlockName = {
   bullet: "Bulleted List",
@@ -565,6 +568,39 @@ export default function ToolBarPlugin({
 
   return (
     <div className="flex items-center gap-4 border px-2 rounded flex-wrap">
+      {/* Undo and Redo */}
+      <div>
+        <Button
+          variant={"ghost"}
+          size={"icon"}
+          disabled={!canUndo || !isEditable}
+          onClick={() => {
+            activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
+          }}
+          // title={IS_APPLE ? "Undo (⌘Z)" : "Undo (Ctrl+Z)"}
+          type="button"
+          className="toolbar-item spaced"
+          aria-label="Undo"
+        >
+          <RotateCcwIcon size={16} />
+        </Button>
+
+        <Button
+          variant={"ghost"}
+          size={"icon"}
+          disabled={!canRedo || !isEditable}
+          onClick={() => {
+            activeEditor.dispatchCommand(REDO_COMMAND, undefined);
+          }}
+          // title={IS_APPLE ? "Redo (⌘Y)" : "Redo (Ctrl+Y)"}
+          type="button"
+          className="toolbar-item"
+          aria-label="Redo"
+        >
+          <RotateCwIcon size={16} />
+        </Button>
+      </div>
+
       {/* Turn into dropdown */}
       <BlockFormatDropDown
         editor={editor}

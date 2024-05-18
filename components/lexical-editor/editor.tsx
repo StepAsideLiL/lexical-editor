@@ -11,8 +11,14 @@ import CodeHighlightPlugin from "@/components/lexical-editor/plugins/CodeHighlig
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import {
+  SharedHistoryContext,
+  useSharedHistoryContext,
+} from "./context/SharedHistoryContext";
 
 export default function Editor() {
+  const { historyState } = useSharedHistoryContext();
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
   const [floatingAnchorElem, setFloatingAnchorElem] =
     useState<HTMLDivElement | null>(null);
@@ -25,38 +31,41 @@ export default function Editor() {
 
   return (
     <div>
-      <ToolBarPlugin setIsLinkEditMode={setIsLinkEditMode} />
-      <div className="relative">
-        <RichTextPlugin
-          contentEditable={
-            <div ref={onRef}>
-              <ContentEditable className="h-96 focus-visible:outline-none py-5" />
-            </div>
-          }
-          placeholder={
-            <div className="absolute top-0 -z-50 text-muted-foreground py-5">
-              Write...
-            </div>
-          }
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-      </div>
-      {floatingAnchorElem && (
-        <>
-          <FloatingLinkEditorPlugin
-            anchorElem={floatingAnchorElem}
-            isLinkEditMode={isLinkEditMode}
-            setIsLinkEditMode={setIsLinkEditMode}
+      <SharedHistoryContext>
+        <ToolBarPlugin setIsLinkEditMode={setIsLinkEditMode} />
+        <div className="relative">
+          <RichTextPlugin
+            contentEditable={
+              <div ref={onRef}>
+                <ContentEditable className="h-96 focus-visible:outline-none py-5" />
+              </div>
+            }
+            placeholder={
+              <div className="absolute top-0 -z-50 text-muted-foreground py-5">
+                Write...
+              </div>
+            }
+            ErrorBoundary={LexicalErrorBoundary}
           />
-        </>
-      )}
-      <LinkPlugin />
-      <LexicalAutoLinkPlugin />
-      <CodeHighlightPlugin />
-      <MarkdownPlugin />
-      <ListPlugin />
-      <ListMaxIndentLevelPlugin />
-      <TabIndentationPlugin />
+        </div>
+        {floatingAnchorElem && (
+          <>
+            <FloatingLinkEditorPlugin
+              anchorElem={floatingAnchorElem}
+              isLinkEditMode={isLinkEditMode}
+              setIsLinkEditMode={setIsLinkEditMode}
+            />
+          </>
+        )}
+        <HistoryPlugin externalHistoryState={historyState} />
+        <LinkPlugin />
+        <LexicalAutoLinkPlugin />
+        <CodeHighlightPlugin />
+        <MarkdownPlugin />
+        <ListPlugin />
+        <ListMaxIndentLevelPlugin />
+        <TabIndentationPlugin />
+      </SharedHistoryContext>
     </div>
   );
 }

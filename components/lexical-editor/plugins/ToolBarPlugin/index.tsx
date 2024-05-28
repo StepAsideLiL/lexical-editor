@@ -484,10 +484,8 @@ export default function ToolBarPlugin({
           ? node.getFormatType()
           : parent?.getFormatType() || "left"
       );
-
-      console.log(elementFormat);
     }
-  }, [elementFormat]);
+  }, []);
 
   useEffect(() => {
     return editor.registerCommand(

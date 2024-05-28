@@ -16,6 +16,7 @@ import {
   SharedHistoryContext,
   useSharedHistoryContext,
 } from "./context/SharedHistoryContext";
+import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 
 export default function Editor() {
   const { historyState } = useSharedHistoryContext();
@@ -50,6 +51,7 @@ export default function Editor() {
         </div>
         {floatingAnchorElem && (
           <>
+            <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
             <FloatingLinkEditorPlugin
               anchorElem={floatingAnchorElem}
               isLinkEditMode={isLinkEditMode}

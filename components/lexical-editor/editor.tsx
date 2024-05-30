@@ -17,6 +17,7 @@ import {
   useSharedHistoryContext,
 } from "./context/SharedHistoryContext";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
+import BlockPickerPlugin from "./plugins/ComponentPickerPlugin";
 
 export default function Editor() {
   const { historyState } = useSharedHistoryContext();
@@ -60,6 +61,7 @@ export default function Editor() {
           </>
         )}
         <HistoryPlugin externalHistoryState={historyState} />
+        <BlockPickerPlugin />
         <LinkPlugin />
         <LexicalAutoLinkPlugin />
         <CodeHighlightPlugin />

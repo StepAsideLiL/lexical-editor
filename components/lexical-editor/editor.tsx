@@ -4,6 +4,7 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import React, { useState } from "react";
 import MarkdownPlugin from "@/components/lexical-editor/plugins/MarkdownPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import ListMaxIndentLevelPlugin from "@/components/lexical-editor/plugins/ListMaxIndentLevelPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import ToolBarPlugin from "@/components/lexical-editor/plugins/ToolBarPlugin";
@@ -67,6 +68,7 @@ export default function Editor() {
         <CodeHighlightPlugin />
         <MarkdownPlugin />
         <ListPlugin />
+        <CheckListPlugin />
         <ListMaxIndentLevelPlugin />
         <TabIndentationPlugin />
       </SharedHistoryContext>
